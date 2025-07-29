@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minto Hikers | Explore the Trails of Minto, Ontario</title>
+    
+    <!-- SEO & Metadata -->
+    <meta name="description" content="Join the Minto Hikers, a friendly, community-oriented hiking group in Minto, Ontario. Discover beautiful local trails, find upcoming hikes, and connect with fellow nature lovers.">
+    <meta name="keywords" content="Minto, Ontario, hiking, trails, community, outdoors, Wellington County, Harriston, Clifford, Palmerston">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 15L0 85h100L50 15z' fill='%233a5a40'/%3E%3Cpath d='M35 55L20 85h30L35 55z' fill='%23588157'/%3E%3C/svg%3E">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Minto Hikers | Explore the Trails of Minto, Ontario">
+    <meta property="og:description" content="Join a friendly, community-oriented hiking group to explore beautiful local trails in and around Minto, Ontario.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=1280&auto=format&fit=crop">
+    <meta property="og:url" content="https://mintohikers.netlify.app/"> 
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://mintohikers.netlify.app/">
+    <meta property="twitter:title" content="Minto Hikers | Explore the Trails of Minto, Ontario">
+    <meta property="twitter:description" content="Join a friendly, community-oriented hiking group to explore beautiful local trails in and around Minto, Ontario.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=1280&auto=format&fit=crop">
+
+    <!-- Performance: Preload the largest and most critical image on the page -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070&auto=format&fit=crop" fetchpriority="high">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+      /*
+      ============================================
+      Design System & Base Styles
+      ============================================
+      */
+      :root {
+        --primary-green: #3a5a40;
+        --accent-green: #588157;
+        --light-green: #a3b18a;
+        --bg-main: #fcfcfc;
+        --bg-alt: #f1f3ef;
+        --text-dark: #212529;
+        --text-light: #495057;
+        --text-white: #ffffff;
+        --border-color: rgba(0, 0, 0, 0.08);
+        --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+        --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.1);
+        --premium-gold: #c6a76d;
+        
+        --font-heading: 'Poppins', sans-serif;
+        --font-body: 'Nunito Sans', sans-serif;
+
+        --transition-fast: all 0.2s ease-in-out;
+        --transition-medium: all 0.4s ease-in-out;
+      }
+
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+
+      body {
+        font-family: var(--font-body);
+        color: var(--text-dark);
+        background-color: var(--bg-main);
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--primary-green);
+      }
+
+      .container {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      
+      @media (min-width: 576px) {
+        .container {
+            padding: 0 1.5rem;
+        }
+      }
+
+      /*
+      ============================================
+      Animation & Reveal on Scroll
+      ============================================
+      */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Staggered animation delays */
+      .reveal.delay-1 { transition-delay: 0.1s; }
+      .reveal.delay-2 { transition-delay: 0.2s; }
+      .reveal.delay-3 { transition-delay: 0.3s; }
+      .reveal.delay-4 { transition-delay: 0.4s; }
+
+      /*
+      ============================================
+      Header & Navigation
+      ============================================
+      */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+        transition: var(--transition-medium);
+        background-color: rgba(252, 252, 252, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .header.scrolled {
+        background-color: var(--bg-main);
+        box-shadow: var(--shadow-light);
+        padding: 0.75rem 0;
+      }
+
+      .header-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        color: var(--primary-green);
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: var(--transition-fast);
+      }
+      .logo:hover {
+        color: var(--accent-green);
+      }
+      
+      .nav-links-desktop { display: none; }
+      .mobile-menu-button {
+        display: block;
+        color: var(--primary-green);
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1002;
+        padding: 0.5rem;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: var(--primary-green);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 1001;
+      }
+      .mobile-menu.open { right: 0; }
+      .mobile-menu a {
+        color: var(--text-white);
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-family: var(--font-heading);
+        transition: var(--transition-fast);
+      }
+      .mobile-menu a:hover { color: var(--light-green); }
+
+      .mobile-menu-close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        color: var(--text-white);
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+      .mobile-menu-close-btn .material-symbols-outlined {
+        font-size: 2rem;
+      }
+
+      @media (min-width: 992px) {
+        .nav-links-desktop {
+          display: flex;
+          gap: 2.5rem;
+        }
+        .nav-links-desktop a {
+          color: var(--primary-green);
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 1rem;
+          position: relative;
+          padding-bottom: 0.25rem;
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+        .nav-links-desktop a::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: var(--accent-green);
+          transition: var(--transition-medium);
+        }
+        .nav-links-desktop a:hover::after {
+          width: 100%;
+        }
+        .mobile-menu-button { display: none; }
+        .mobile-menu { display: none; }
+      }
+      
+      .premium-link .material-symbols-outlined {
+        color: var(--premium-gold);
+        font-size: 1.2rem;
+      }
+
+      /*
+      ============================================
+      Hero Section
+      ============================================
+      */
+      .hero {
+        position: relative;
+        height: 90vh;
+        min-height: 600px;
+        background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        color: var(--text-white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-content {
+        text-align: center;
+        max-width: 800px;
+        padding: 0 1rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+        color: var(--text-white);
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: var(--accent-green);
+        color: var(--text-white);
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 20px rgba(88, 129, 87, 0.4);
+        transition: var(--transition-fast);
+      }
+      .cta-button:hover {
+        transform: translateY(-3px);
+        background-color: var(--primary-green);
+        box-shadow: 0 6px 25px rgba(58, 90, 64, 0.5);
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 { font-size: 2.2rem; }
+      }
+      @media (min-width: 768px) {
+        .hero h1 { font-size: 3.5rem; }
+        .hero p { font-size: 1.25rem; }
+      }
+      @media (min-width: 992px) {
+        .hero h1 { font-size: 4.5rem; }
+        .hero p { font-size: 1.5rem; }
+      }
+
+      /*
+      ============================================
+      Section Styles
+      ============================================
+      */
+      .section { padding: 4rem 0; }
+      .section#about { background-color: var(--bg-main); }
+      .section#trail-finder { background-color: var(--bg-alt); }
+      .section#hikes { background-color: var(--bg-main); }
+      .section#gallery { background-color: var(--bg-alt); }
+      .section#photo-highlights { background-color: var(--bg-main); }
+      .section#calculator { background-color: var(--bg-alt); }
+      .section#contact { background-color: var(--bg-main); }
+      
+      .section-title {
+        font-size: 2rem;
+        text-align: center;
+        position: relative;
+        margin-bottom: 1rem;
+      }
+      .section-subtitle {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto 3rem auto;
+        font-size: 1rem;
+        color: var(--text-light);
+      }
+      
+      @media (min-width: 768px) {
+        .section { padding: 6rem 0; }
+        .section-title { font-size: 2.5rem; }
+        .section-subtitle { font-size: 1.1rem; margin-bottom: 4rem;}
+      }
+       @media (min-width: 992px) {
+        .section { padding: 8rem 0; }
+        .section-title { font-size: 3rem; }
+      }
+
+      /*
+      ============================================
+      About Section
+      ============================================
+      */
+      .about-content {
+        max-width: 56rem;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--text-light);
+        line-height: 1.8;
+      }
+      .about-content p {
+        margin-bottom: 1.5rem;
+      }
+      
+      /*
+      ============================================
+      Trail Finder Section
+      ============================================
+      */
+      .trail-finder-wrapper {
+        max-width: 48rem;
+        margin: 0 auto;
+        background-color: var(--bg-main);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+      
+      .filter-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .trail-finder-wrapper { padding: 3rem; }
+        .filter-grid { grid-template-columns: 1fr 1fr; }
+      }
+
+      .filter-group {
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          padding: 1.5rem;
+      }
+
+      .filter-group legend {
+          font-weight: 600;
+          font-family: var(--font-heading);
+          color: var(--primary-green);
+          padding: 0 0.5rem;
+          margin-left: 1rem;
+      }
+
+      .filter-options {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+      }
+
+      .filter-option {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          cursor: pointer;
+      }
+
+      .filter-option input[type="checkbox"] {
+          accent-color: var(--primary-green);
+          width: 1.25rem;
+          height: 1.25rem;
+          cursor: pointer;
+      }
+
+      .filter-option label {
+          font-size: 1rem;
+          color: var(--text-dark);
+          cursor: pointer;
+      }
+
+      .btn {
+        width: 100%;
+        background-color: var(--primary-green);
+        color: var(--text-white);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 1rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: var(--transition-fast);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+      .btn:hover:not(:disabled) {
+        background-color: var(--accent-green);
+        transform: translateY(-2px);
+      }
+      .btn:disabled {
+        background-color: var(--light-green);
+        cursor: not-allowed;
+      }
+      .btn .spinner {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--text-white);
+        animation: spin 1s ease-in-out infinite;
+      }
+      .btn.loading .spinner {
+        display: block;
+      }
+      @keyframes spin {
+          to {
+              transform: rotate(360deg);
+          }
+      }
+
+      .btn.btn-secondary {
+          background-color: var(--accent-green);
+          font-size: 1rem;
+          padding: 0.75rem 1.5rem;
+      }
+      .btn.btn-secondary:hover:not(:disabled) {
+          background-color: var(--primary-green);
+      }
+
+      #trail-finder-result {
+        margin-top: 2rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        background: var(--bg-main);
+      }
+       @media (min-width: 768px) {
+        #trail-finder-result { padding: 2rem; }
+       }
+      #trail-finder-result.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      #trail-finder-result h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .ai-hike-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .ai-hike-info .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+      }
+      .ai-hike-info .info-item .material-symbols-outlined {
+        color: var(--accent-green);
+      }
+      .ai-hike-description {
+        color: var(--text-light);
+        line-height: 1.8;
+      }
+      .ai-hike-description strong {
+          color: var(--primary-green);
+          font-family: var(--font-heading);
+      }
+
+
+      /*
+      ============================================
+      Hikes Section
+      ============================================
+      */
+      .hikes-grid {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      @media (min-width: 640px) {
+        .hikes-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (min-width: 1024px) {
+        .hikes-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+      
+      .hike-card {
+        background-color: var(--bg-alt);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        box-shadow: var(--shadow-light);
+        transition: var(--transition-fast);
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        height: 100%;
+      }
+      
+      .hike-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-medium);
+        border-color: rgba(58, 90, 64, 0.3);
+      }
+      
+      .hike-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+      }
+
+      .hike-card .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+        color: var(--text-light);
+      }
+      .hike-card .info-item .material-symbols-outlined {
+        font-size: 1.2rem;
+        color: var(--accent-green);
+      }
+      .hike-card .info-item.date {
+        font-weight: 600;
+        color: var(--primary-green);
+      }
+      
+      .hike-card .description {
+        font-size: 1rem;
+        color: var(--text-light);
+        margin-top: 1rem;
+        flex-grow: 1;
+        margin-bottom: 1.5rem;
+      }
+
+      /*
+      ============================================
+      Gallery Section
+      ============================================
+      */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      @media (min-width: 576px) {
+        .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      }
+
+      @media (min-width: 992px) {
+        .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+      }
+      
+      .gallery-item {
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: var(--shadow-light);
+        position: relative;
+        transition: var(--transition-medium);
+        aspect-ratio: 1 / 1;
+      }
+      .gallery-item:hover {
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: var(--shadow-medium);
+      }
+      
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: var(--transition-medium);
+      }
+      
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+
+      /*
+      ============================================
+      Hike Calculator Section
+      ============================================
+      */
+      .calculator-wrapper {
+        max-width: 48rem;
+        margin: 0 auto;
+        background-color: var(--bg-main);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+
+      .calculator-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      @media (min-width: 768px) {
+          .calculator-wrapper { padding: 3rem; }
+          .calculator-grid { grid-template-columns: 1fr 1fr; }
+          .calculator-grid-span-2 { grid-column: span 2; }
+      }
+
+      .form-group-select {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        background-color: var(--bg-main);
+        transition: var(--transition-fast);
+        -webkit-appearance: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.5rem center;
+        background-repeat: no-repeat;
+        background-size: 1.5em 1.5em;
+        padding-right: 2.5rem;
+      }
+
+      #calculator-result {
+        margin-top: 2rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        background: var(--bg-alt);
+      }
+      @media (min-width: 768px) {
+        #calculator-result { padding: 2rem; }
+      }
+      #calculator-result.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      #calculator-result h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .calc-hike-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .calc-hike-info .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.1rem;
+      }
+      .calc-hike-info .info-item strong {
+        font-family: var(--font-body);
+        font-weight: 600;
+        margin-right: 0.25rem;
+      }
+      .calc-hike-info .info-item .material-symbols-outlined {
+        color: var(--accent-green);
+      }
+      .calc-hike-description {
+        color: var(--text-light);
+        line-height: 1.8;
+        font-size: 0.9rem;
+      }
+      .error-message {
+        color: #c62828;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      /*
+      ============================================
+      Contact Section
+      ============================================
+      */
+      .contact-form-wrapper {
+        max-width: 48rem;
+        margin: 0 auto;
+        background-color: var(--bg-alt);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+       @media (min-width: 768px) {
+        .contact-form-wrapper { padding: 3rem; }
+      }
+      
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+      
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        background-color: var(--bg-main);
+        transition: var(--transition-fast);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group-select:focus {
+        outline: none;
+        border-color: var(--accent-green);
+        box-shadow: 0 0 0 3px rgba(88, 129, 87, 0.2);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 140px;
+      }
+      
+      #formMessage {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        display: none;
+        font-weight: 600;
+      }
+
+      #formMessage.success {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+        display: block;
+      }
+      #formMessage.error {
+        background-color: #ffebee;
+        color: #c62828;
+        display: block;
+      }
+      
+      /*
+      ============================================
+      Footer
+      ============================================
+      */
+      .footer {
+        background-color: var(--primary-green);
+        color: var(--text-white);
+        text-align: center;
+        padding: 3rem 0;
+      }
+       @media (min-width: 768px) {
+        .footer { padding: 4rem 0; }
+      }
+      
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .social-links a {
+        color: var(--text-white);
+        text-decoration: none;
+        border: 2px solid rgba(255,255,255,0.5);
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transition-fast);
+      }
+      
+      .social-links a:not(.disabled):hover {
+        background-color: var(--text-white);
+        color: var(--primary-green);
+        transform: translateY(-3px);
+      }
+      
+      .social-links a.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .footer p {
+        font-size: 0.9rem;
+        color: var(--light-green);
+      }
+      .footer p a {
+        color: var(--light-green);
+        text-decoration: underline;
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.11.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+
+    <header class="header" id="header">
+      <div class="container">
+        <nav class="header-nav">
+          <a href="#" class="logo">Minto Hikers</a>
+          <div class="nav-links-desktop">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#trail-finder" class="nav-link">Trail Finder</a>
+            <a href="#hikes" class="nav-link">Hikes</a>
+            <a href="#gallery" class="nav-link">Gallery</a>
+            <a href="#photo-highlights" class="nav-link">Highlights</a>
+            <a href="#calculator" class="nav-link">Calculator</a>
+            <a href="#contact" class="nav-link">Contact</a>
+          </div>
+          <button class="mobile-menu-button" id="mobile-menu-btn" aria-label="Toggle menu">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </nav>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <button class="mobile-menu-close-btn" id="mobile-menu-close-btn" aria-label="Close menu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#trail-finder" class="nav-link">Trail Finder</a>
+        <a href="#hikes" class="nav-link">Hikes</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#photo-highlights" class="nav-link">Highlights</a>
+        <a href="#calculator" class="nav-link">Calculator</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1 class="reveal">Minto Hikers</h1>
+                <p class="reveal delay-1">Explore the beautiful trails of Minto, Ontario and beyond.</p>
+                <a href="#hikes" class="cta-button nav-link reveal delay-2">Explore Hikes</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title reveal">An Authentic Minto Hiking Community</h2>
+                <p class="section-subtitle reveal delay-1">Connecting people with nature and each other, one local trail at a time.</p>
+                <div class="about-content reveal delay-2">
+                    <p>Minto Hikers is a friendly, community-oriented group dedicated to exploring the robust and actively managed outdoor recreation landscape of Minto, Ontario. Our town is a hub for beautiful local trails like the Clifford Trail, White's Junction, and the Harriston Greenway, and serves as a gateway to the broader Wellington County trail network.</p>
+                    <p>We welcome hikers of all experience levels. Our philosophy centers on fostering positive connections—not only with nature but also among our members. We believe hiking is an opportunity to build a supportive community and enjoy the fellowship of like-minded individuals right here in our own backyard.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="trail-finder" class="section">
+            <div class="container">
+                <h2 class="section-title reveal">AI Trail Finder</h2>
+                <p class="section-subtitle reveal delay-1">Let our AI guide find the perfect hike for you in the Minto area.</p>
+                <div class="trail-finder-wrapper reveal delay-2">
+                    <form id="trail-finder-form">
+                        <div class="filter-grid">
+                            <fieldset class="filter-group">
+                                <legend>Difficulty Level</legend>
+                                <div class="filter-options">
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="diff-easy" name="difficulty" value="easy">
+                                        <label for="diff-easy">Easy & Accessible</label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="diff-moderate" name="difficulty" value="moderate">
+                                        <label for="diff-moderate">Moderate Challenge</label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="diff-challenging" name="difficulty" value="challenging">
+                                        <label for="diff-challenging">Challenging & Long</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="filter-group">
+                                <legend>Hike Vibe</legend>
+                                <div class="filter-options">
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="vibe-family" name="vibe" value="Family Fun">
+                                        <label for="vibe-family">Family Fun</label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="vibe-scenic" name="vibe" value="Scenic Views">
+                                        <label for="vibe-scenic">Scenic Views</label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="vibe-historic" name="vibe" value="Historic Route">
+                                        <label for="vibe-historic">Historic Route</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <button type="submit" class="btn" id="trail-finder-btn">
+                            <span class="btn-text">Generate My AI Trail</span>
+                            <div class="spinner"></div>
+                        </button>
+                    </form>
+                    <div id="trail-finder-result" aria-live="polite"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hikes" class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Upcoming Local Hikes</h2>
+                 <p class="section-subtitle reveal delay-1">Ready for an adventure? Discover Minto's trails and join us for a hike.</p>
+                <ul class="hikes-grid" id="hikes-grid">
+                    <!-- Hike cards will be dynamically inserted here -->
+                </ul>
+            </div>
+        </section>
+
+        <section id="gallery" class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Scenes From Our Trails</h2>
+                <p class="section-subtitle reveal delay-1">A glimpse into the beautiful landscapes we explore together in and around Minto.</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item reveal delay-2">
+                        <img src="https://images.unsplash.com/photo-1534582929036-cc7f1bb2043e?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A wooden bridge on a forest hiking trail" loading="lazy">
+                    </div>
+                    <div class="gallery-item reveal delay-3">
+                        <img src="https://images.unsplash.com/photo-1536625979259-edbae645c7c3?q=80&w=388&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A hiker on a trail during autumn with vibrant fall colors" loading="lazy">
+                    </div>
+                    <div class="gallery-item reveal delay-4">
+                         <img src="https://plus.unsplash.com/premium_photo-1664353833903-7cb8fbefaa27?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A view of a winding river from a high vantage point on a trail" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="photo-highlights" class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Photo Highlights</h2>
+                <p class="section-subtitle reveal delay-1">A few more stunning views captured by hikers on their adventures.</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item reveal delay-2">
+                        <img src="https://scontent.fyyz2-1.fna.fbcdn.net/v/t39.30808-6/515232230_9670922113014016_5831788602378751482_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=Nw87TZmyhLYQ7kNvwHZdXr0&_nc_oc=AdmA2Vq0ocJNoqWTYwIzaEk3fUvfUMJwVFT_8Bj3nOYziZQ6QZlm3TC6LOnNHyZEnck&_nc_zt=23&_nc_ht=scontent.fyyz2-1.fna&_nc_gid=TRYCetwyF7hS5F46oBRzvQ&oh=00_AfRhj-ePJH0-UvRJdr4tuqSrwfL6wx-1e7VVJ343fQjeTg&oe=688DB2A7" alt="A hiker on a trail during autumn with vibrant fall colors" loading="lazy">
+                    </div>
+                    <div class="gallery-item reveal delay-3">
+                        <img src="https://scontent.fyyz2-1.fna.fbcdn.net/v/t39.30808-6/516436537_9670929519679942_6679202167307202259_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=9g0pJAhxRUgQ7kNvwFS-peT&_nc_oc=AdlfRFgO9AKqgB7Gts7up3NvJpN5zOv7gbWNzOF2yzH6VlgaxqHjX_pmoqVgu5M2ygo&_nc_zt=23&_nc_ht=scontent.fyyz2-1.fna&_nc_gid=cyVS_-xjuAMKbsw33wnUxQ&oh=00_AfTYYwqgP5uXhrgoCtDOvPh6tLa20yffRpt8f3wTP-SLxQ&oe=688DCB3B" alt="A view of a winding river from a high vantage point on a trail" loading="lazy">
+                    </div>
+                    <div class="gallery-item reveal delay-4">
+                        <img src="https://scontent.fyyz2-1.fna.fbcdn.net/v/t39.30808-6/516504352_9670936356345925_5545447248563859842_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=UUt7EcSlirIQ7kNvwEXvh5l&_nc_oc=Adl6wZ2mupKuOC-ku6mKFLyhflVF1CTKVaPDryVfQXUWE8O5E6IScYuqh9S_mJ3NOD0&_nc_zt=23&_nc_ht=scontent.fyyz2-1.fna&_nc_gid=SezTPlT4FJ0n3oLodUBzyg&oh=00_AfT_i6RAo-fXUQ6dm05oW_hdlm0FWG6j4XK1lz9WJj_qxA&oe=688DC406" alt="A path leading into a dense green forest, sunlight filtering through the trees" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="calculator" class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Hike Time & Difficulty Calculator</h2>
+                <p class="section-subtitle reveal delay-1">Estimate your hike's duration and difficulty before you hit the trail. Calculations are based on a modified Naismith's Rule.</p>
+                <div class="calculator-wrapper reveal delay-2">
+                    <form id="calculator-form">
+                        <div class="calculator-grid">
+                            <div class="form-group">
+                                <label for="hike-distance">Hike Distance (km)</label>
+                                <input type="number" id="hike-distance" name="distance" placeholder="e.g., 10" required min="0.1" step="0.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="hike-elevation">Elevation Gain (meters)</label>
+                                <input type="number" id="hike-elevation" name="elevation" placeholder="e.g., 300" min="0" step="10">
+                            </div>
+                            <div class="form-group calculator-grid-span-2">
+                                 <label for="hike-pace">Your Average Pace</label>
+                                 <select id="hike-pace" name="pace" class="form-group-select">
+                                    <option value="slow">Slow (approx. 3 km/h)</option>
+                                    <option value="average" selected>Average (approx. 4 km/h)</option>
+                                    <option value="fast">Fast (approx. 5 km/h)</option>
+                                 </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn" id="calculator-btn">
+                            Calculate
+                        </button>
+                    </form>
+                    <div id="calculator-result" aria-live="polite"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Get in Touch</h2>
+                <p class="section-subtitle reveal delay-1">Have a question or want to join our mailing list? Send us a message!</p>
+                <div class="contact-form-wrapper reveal delay-2">
+                   <form id="contact-form" name="contact" method="POST" data-netlify="true">
+                       <input type="hidden" name="form-name" value="contact" />
+                       <div class="form-group">
+                           <label for="name">Your Name</label>
+                           <input type="text" id="name" name="name" required placeholder="John Doe">
+                       </div>
+                       <div class="form-group">
+                           <label for="email">Your Email</label>
+                           <input type="email" id="email" name="email" required placeholder="you@example.com">
+                       </div>
+                       <div class="form-group">
+                           <label for="message">Your Message</label>
+                           <textarea id="message" name="message" required placeholder="Hi there! I'd love to learn more about..."></textarea>
+                       </div>
+                       <button type="submit" class="btn">Send Message</button>
+                       <div id="formMessage" role="status"></div>
+                   </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.facebook.com/groups/485997363696548/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg></a>
+                <a href="#" class="disabled" aria-label="Instagram (coming soon)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.282.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.232s.008-2.389.046-3.232c.036-.78.166-1.204.275-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.958 1.264a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-2.176 1.953a4.271 4.271 0 1 1-8.542 0 4.271 4.271 0 0 1 8.542 0z"/></svg></a>
+                <a href="#" class="disabled" aria-label="Meetup (coming soon)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M3.828 6.75c0 2.22.41 3.332 1.343 4.272.933.94 2.05.99 4.272.99 2.22 0 3.332-.41 4.272-1.343.94-.933.99-2.05.99-4.272 0-2.22-.41-3.332-1.343-4.272C12.394 1.547 11.282 1.5 9.06 1.5c-2.22 0-3.332.41-4.272 1.343C3.857 3.784 3.828 4.9 3.828 6.75zm3.123-2.437c.334-.334.667-.5.889-.533.222-.033.5.022.833.222.334.2.5.411.5.667 0 .256-.167.5-.5.833-.333.334-.667.5-.889.533-.222.033-.5-.022-.833-.222-.334-.2-.5-.411-.5-.667 0-.256.167.5.5-.833zm2.22 3.11c-.556.556-1.333.667-2.222.334-.89-.333-1.223-.944-1-1.666.223-.723.834-1.223 1.667-1.223s1.444.389 1.667 1c.222.611.055 1.222-.5 1.555zM.056 8.169c.033.222.055.444.055.666 0 2.222.411 3.333 1.344 4.273.933.94 2.05.989 4.272.989h.5v-1.5c0-.222.056-.5.167-.833.11-.333.305-.583.583-.75.278-.166.556-.222.833-.166.278.056.5.167.667.334.166.166.277.388.333.666.056.278.056.556.028.834l-.028.166v.5h.5c2.222 0 3.333-.411 4.273-1.344.94-.933.989-2.05.989-4.272 0-2.222-.411-3.333-1.344-4.273C12.394 1.583 11.282 1.5 9.06 1.5 6.84 1.5 5.728 1.91 4.795 2.844 3.862 3.778 3.828 4.9 3.828 6.75c0 .222.022.444.055.666H1.667v.5h2.218z"/></svg></a>
+            </div>
+            <p>&copy; 2024 Minto Hikers. All Rights Reserved. <br>Designed by a fellow hiker.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="index.tsx" defer></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
