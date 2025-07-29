@@ -53,7 +53,6 @@
         --border-color: rgba(0, 0, 0, 0.08);
         --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
         --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.1);
-        --premium-gold: #c6a76d;
         
         --font-heading: 'Poppins', sans-serif;
         --font-body: 'Nunito Sans', sans-serif;
@@ -244,11 +243,6 @@
         .mobile-menu { display: none; }
       }
       
-      .premium-link .material-symbols-outlined {
-        color: var(--premium-gold);
-        font-size: 1.2rem;
-      }
-
       /*
       ============================================
       Hero Section
@@ -331,7 +325,6 @@
       .section#trail-finder { background-color: var(--bg-alt); }
       .section#hikes { background-color: var(--bg-main); }
       .section#gallery { background-color: var(--bg-alt); }
-      .section#photo-highlights { background-color: var(--bg-main); }
       .section#calculator { background-color: var(--bg-alt); }
       .section#contact { background-color: var(--bg-main); }
       
@@ -888,7 +881,6 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
 <body>
 
@@ -901,7 +893,6 @@
             <a href="#trail-finder" class="nav-link">Trail Finder</a>
             <a href="#hikes" class="nav-link">Hikes</a>
             <a href="#gallery" class="nav-link">Gallery</a>
-            <a href="#photo-highlights" class="nav-link">Highlights</a>
             <a href="#calculator" class="nav-link">Calculator</a>
             <a href="#contact" class="nav-link">Contact</a>
           </div>
@@ -918,7 +909,6 @@
         <a href="#trail-finder" class="nav-link">Trail Finder</a>
         <a href="#hikes" class="nav-link">Hikes</a>
         <a href="#gallery" class="nav-link">Gallery</a>
-        <a href="#photo-highlights" class="nav-link">Highlights</a>
         <a href="#calculator" class="nav-link">Calculator</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
@@ -1023,24 +1013,6 @@
                 </div>
             </div>
         </section>
-
-        <section id="photo-highlights" class="section">
-            <div class="container">
-                <h2 class="section-title reveal">Photo Highlights</h2>
-                <p class="section-subtitle reveal delay-1">A few more stunning views captured by hikers on their adventures.</p>
-                <div class="gallery-grid">
-                    <div class="gallery-item reveal delay-2">
-                        <img src="https://scontent.fyyz2-1.fna.fbcdn.net/v/t39.30808-6/515232230_9670922113014016_5831788602378751482_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=Nw87TZmyhLYQ7kNvwHZdXr0&_nc_oc=AdmA2Vq0ocJNoqWTYwIzaEk3fUvfUMJwVFT_8Bj3nOYziZQ6QZlm3TC6LOnNHyZEnck&_nc_zt=23&_nc_ht=scontent.fyyz2-1.fna&_nc_gid=TRYCetwyF7hS5F46oBRzvQ&oh=00_AfRhj-ePJH0-UvRJdr4tuqSrwfL6wx-1e7VVJ343fQjeTg&oe=688DB2A7" alt="A hiker on a trail during autumn with vibrant fall colors" loading="lazy">
-                    </div>
-                    <div class="gallery-item reveal delay-3">
-                        <img src="https://scontent.fyyz2-1.fna.fbcdn.net/v/t39.30808-6/516436537_9670929519679942_6679202167307202259_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=9g0pJAhxRUgQ7kNvwFS-peT&_nc_oc=AdlfRFgO9AKqgB7Gts7up3NvJpN5zOv7gbWNzOF2yzH6VlgaxqHjX_pmoqVgu5M2ygo&_nc_zt=23&_nc_ht=scontent.fyyz2-1.fna&_nc_gid=cyVS_-xjuAMKbsw33wnUxQ&oh=00_AfTYYwqgP5uXhrgoCtDOvPh6tLa20yffRpt8f3wTP-SLxQ&oe=688DCB3B" alt="A view of a winding river from a high vantage point on a trail" loading="lazy">
-                    </div>
-                    <div class="gallery-item reveal delay-4">
-                        <img src="https://scontent.fyyz2-1.fna.fbcdn.net/v/t39.30808-6/516504352_9670936356345925_5545447248563859842_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=UUt7EcSlirIQ7kNvwEXvh5l&_nc_oc=Adl6wZ2mupKuOC-ku6mKFLyhflVF1CTKVaPDryVfQXUWE8O5E6IScYuqh9S_mJ3NOD0&_nc_zt=23&_nc_ht=scontent.fyyz2-1.fna&_nc_gid=SezTPlT4FJ0n3oLodUBzyg&oh=00_AfT_i6RAo-fXUQ6dm05oW_hdlm0FWG6j4XK1lz9WJj_qxA&oe=688DC406" alt="A path leading into a dense green forest, sunlight filtering through the trees" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
         
         <section id="calculator" class="section">
             <div class="container">
@@ -1106,14 +1078,13 @@
         <div class="container">
             <div class="social-links">
                 <a href="https://www.facebook.com/groups/485997363696548/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg></a>
-                <a href="#" class="disabled" aria-label="Instagram (coming soon)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.282.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.232s.008-2.389.046-3.232c.036-.78.166-1.204.275-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.958 1.264a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-2.176 1.953a4.271 4.271 0 1 1-8.542 0 4.271 4.271 0 0 1 8.542 0z"/></svg></a>
-                <a href="#" class="disabled" aria-label="Meetup (coming soon)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M3.828 6.75c0 2.22.41 3.332 1.343 4.272.933.94 2.05.99 4.272.99 2.22 0 3.332-.41 4.272-1.343.94-.933.99-2.05.99-4.272 0-2.22-.41-3.332-1.343-4.272C12.394 1.547 11.282 1.5 9.06 1.5c-2.22 0-3.332.41-4.272 1.343C3.857 3.784 3.828 4.9 3.828 6.75zm3.123-2.437c.334-.334.667-.5.889-.533.222-.033.5.022.833.222.334.2.5.411.5.667 0 .256-.167.5-.5.833-.333.334-.667.5-.889.533-.222.033-.5-.022-.833-.222-.334-.2-.5-.411-.5-.667 0-.256.167.5.5-.833zm2.22 3.11c-.556.556-1.333.667-2.222.334-.89-.333-1.223-.944-1-1.666.223-.723.834-1.223 1.667-1.223s1.444.389 1.667 1c.222.611.055 1.222-.5 1.555zM.056 8.169c.033.222.055.444.055.666 0 2.222.411 3.333 1.344 4.273.933.94 2.05.989 4.272.989h.5v-1.5c0-.222.056-.5.167-.833.11-.333.305-.583.583-.75.278-.166.556-.222.833-.166.278.056.5.167.667.334.166.166.277.388.333.666.056.278.056.556.028.834l-.028.166v.5h.5c2.222 0 3.333-.411 4.273-1.344.94-.933.989-2.05.989-4.272 0-2.222-.411-3.333-1.344-4.273C12.394 1.583 11.282 1.5 9.06 1.5 6.84 1.5 5.728 1.91 4.795 2.844 3.862 3.778 3.828 4.9 3.828 6.75c0 .222.022.444.055.666H1.667v.5h2.218z"/></svg></a>
+                <a href="#" class="disabled" aria-label="Instagram (coming soon)" aria-disabled="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.282.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.232s.008-2.389.046-3.232c.036-.78.166-1.204.275-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.958 1.264a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-2.176 1.953a4.271 4.271 0 1 1-8.542 0 4.271 4.271 0 0 1 8.542 0z"/></svg></a>
+                <a href="#" class="disabled" aria-label="Meetup (coming soon)" aria-disabled="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M3.828 6.75c0 2.22.41 3.332 1.343 4.272.933.94 2.05.99 4.272.99 2.22 0 3.332-.41 4.272-1.343.94-.933.99-2.05.99-4.272 0-2.22-.41-3.332-1.343-4.272C12.394 1.547 11.282 1.5 9.06 1.5c-2.22 0-3.332.41-4.272 1.343C3.857 3.784 3.828 4.9 3.828 6.75zm3.123-2.437c.334-.334.667-.5.889-.533.222-.033.5.022.833.222.334.2.5.411.5.667 0 .256-.167.5-.5.833-.333.334-.667.5-.889.533-.222.033-.5-.022-.833-.222-.334-.2-.5-.411-.5-.667 0-.256.167.5.5-.833zm2.22 3.11c-.556.556-1.333.667-2.222.334-.89-.333-1.223-.944-1-1.666.223-.723.834-1.223 1.667-1.223s1.444.389 1.667 1c.222.611.055 1.222-.5 1.555zM.056 8.169c.033.222.055.444.055.666 0 2.222.411 3.333 1.344 4.273.933.94 2.05.989 4.272.989h.5v-1.5c0-.222.056-.5.167-.833.11-.333.305-.583.583-.75.278-.166.556-.222.833-.166.278.056.5.167.667.334.166.166.277.388.333.666.056.278.056.556.028.834l-.028.166v.5h.5c2.222 0 3.333-.411 4.273-1.344.94-.933.989-2.05.989-4.272 0-2.222-.411-3.333-1.344-4.273C12.394 1.583 11.282 1.5 9.06 1.5 6.84 1.5 5.728 1.91 4.795 2.844 3.862 3.778 3.828 4.9 3.828 6.75c0 .222.022.444.055.666H1.667v.5h2.218z"/></svg></a>
             </div>
             <p>&copy; 2024 Minto Hikers. All Rights Reserved. <br>Designed by a fellow hiker.</p>
         </div>
     </footer>
 
     <script type="module" src="index.tsx" defer></script>
-<script type="module" src="/index.tsx"></script>
 </body>
 </html>
