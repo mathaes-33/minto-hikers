@@ -1,19 +1,29 @@
+
 import { GoogleGenAI, Type } from "@google/genai";
+
+// --- API KEY HANDLING ---
+// The API key is expected to be available as process.env.API_KEY.
+// This is typically handled by the build/deployment environment (e.g., Netlify).
+const API_KEY = (typeof process !== 'undefined' && process.env && process.env.API_KEY) 
+  ? process.env.API_KEY 
+  : undefined;
 
 // --- CRITICAL: API KEY CHECK ---
 // Stop execution immediately if the API key is not configured.
-if (!process.env.API_KEY) {
+if (!API_KEY) {
+  // Clear the body and show a user-friendly error message.
   document.body.innerHTML = `
-    <div style="font-family: sans-serif; text-align: center; padding: 4rem; background-color: #ffebee; color: #c62828;">
-      <h1>Configuration Error</h1>
-      <p>The <strong>API_KEY</strong> is not set. The application cannot function without it.</p>
-      <p>Please ensure the API_KEY environment variable is configured correctly.</p>
+    <div style="font-family: sans-serif; text-align: center; padding: 2rem; background-color: #ffebee; color: #c62828; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box;">
+      <h1 style="margin-bottom: 1rem;">Configuration Error</h1>
+      <p style="max-width: 600px; line-height: 1.6;">The <strong>API_KEY</strong> is not set. The application cannot function without it.</p>
+      <p style="max-width: 600px; line-height: 1.6;">Please ensure the <code>API_KEY</code> environment variable is configured correctly in your hosting provider's settings (e.g., Netlify, Vercel).</p>
     </div>
   `;
-  throw new Error("API_KEY environment variable is not set.");
+  // Stop further script execution.
+  throw new Error("API_KEY environment variable is not set or not accessible in the client-side build.");
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 
 // --- TYPE DEFINITIONS ---
