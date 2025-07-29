@@ -16,5 +16,5 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.env.local
-.env.API_KEY
+.env.local*
+.env.API_KEY*
