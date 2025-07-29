@@ -1,2 +1,20 @@
+# Dependency directories
+node_modules/
+
+# Build directories
+dist/
+build/
+
+# TypeScript artifacts
+*.tsbuildinfo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 .env.local
 .env.API_KEY
