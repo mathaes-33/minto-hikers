@@ -1,30 +1,4 @@
-
-import { GoogleGenAI, Type } from "@google/genai";
-
-// --- API KEY HANDLING ---
-// The API key is expected to be available as process.env.API_KEY.
-// This is typically handled by the build/deployment environment (e.g., Netlify).
-const API_KEY = (typeof process !== 'undefined' && process.env && process.env.API_KEY) 
-  ? process.env.API_KEY 
-  : undefined;
-
-// --- CRITICAL: API KEY CHECK ---
-// Stop execution immediately if the API key is not configured.
-if (!API_KEY) {
-  // Clear the body and show a user-friendly error message.
-  document.body.innerHTML = `
-    <div style="font-family: sans-serif; text-align: center; padding: 2rem; background-color: #ffebee; color: #c62828; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box;">
-      <h1 style="margin-bottom: 1rem;">Configuration Error</h1>
-      <p style="max-width: 600px; line-height: 1.6;">The <strong>API_KEY</strong> is not set. The application cannot function without it.</p>
-      <p style="max-width: 600px; line-height: 1.6;">Please ensure the <code>API_KEY</code> environment variable is configured correctly in your hosting provider's settings (e.g., Netlify, Vercel).</p>
-    </div>
-  `;
-  // Stop further script execution.
-  throw new Error("API_KEY environment variable is not set or not accessible in the client-side build.");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
-
+import { Type } from "@google/genai";
 
 // --- TYPE DEFINITIONS ---
 interface Hike {
@@ -226,7 +200,7 @@ function initializeAITrailFinder() {
 }
 
 /**
- * Handles the submission of the AI Trail Finder form, including the Gemini API call.
+ * Handles the submission of the AI Trail Finder form by calling a secure serverless proxy.
  */
 async function handleAITrailFinderSubmit(e: SubmitEvent, form: HTMLFormElement, button: HTMLButtonElement, resultEl: HTMLElement) {
     e.preventDefault();
@@ -254,26 +228,32 @@ async function handleAITrailFinderSubmit(e: SubmitEvent, form: HTMLFormElement, 
         const vibesText = selectedVibes.join(', ') || 'any';
         const prompt = `You are a creative trail guide for the Minto, Ontario area in Canada. A hiker is looking for a trail with the following characteristics: difficulty of ${difficultiesText}, and vibes of ${vibesText}. Generate a single, plausible-sounding but fictional trail suggestion. The trail should feel like it belongs in the Minto/Wellington County region. Be creative and encouraging in your description. Provide your response in JSON format according to the provided schema.`;
 
-        const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: prompt,
-            config: {
-                responseMimeType: "application/json",
-                responseSchema: {
-                    type: Type.OBJECT,
-                    properties: {
-                        trailName: { type: Type.STRING, description: "A creative and plausible name for the trail." },
-                        difficulty: { type: Type.STRING, description: "The difficulty level (e.g., Easy, Moderate, Challenging)." },
-                        distance: { type: Type.STRING, description: "The estimated length of the trail (e.g., '5 km loop')." },
-                        description: { type: Type.STRING, description: "A one-paragraph, engaging description of the trail experience." },
-                        whyItMatches: { type: Type.STRING, description: "A short sentence explaining why this trail is a good match for the user's preferences." }
-                    },
-                    required: ["trailName", "difficulty", "distance", "description", "whyItMatches"]
-                },
+        const schema = {
+            type: Type.OBJECT,
+            properties: {
+                trailName: { type: Type.STRING, description: "A creative and plausible name for the trail." },
+                difficulty: { type: Type.STRING, description: "The difficulty level (e.g., Easy, Moderate, Challenging)." },
+                distance: { type: Type.STRING, description: "The estimated length of the trail (e.g., '5 km loop')." },
+                description: { type: Type.STRING, description: "A one-paragraph, engaging description of the trail experience." },
+                whyItMatches: { type: Type.STRING, description: "A short sentence explaining why this trail is a good match for the user's preferences." }
             },
+            required: ["trailName", "difficulty", "distance", "description", "whyItMatches"]
+        };
+
+        const proxyResponse = await fetch('/.netlify/functions/gemini-proxy', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt, schema })
         });
+
+        const data = await proxyResponse.json();
+
+        if (!proxyResponse.ok) {
+            throw new Error(data.message || `The AI service failed with status: ${proxyResponse.status}`);
+        }
         
-        const jsonResponse: AITrailResponse = JSON.parse(response.text);
+        const jsonResponse: AITrailResponse = JSON.parse(data.text);
+
         resultEl.innerHTML = `
             <h3>Your AI-Generated Trail:</h3>
             <div class="ai-hike-info">
